@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="Test" Comment="">
+	<VersionInfo Version="1.0" Author="xin" Date="2020-12-03">
+	</VersionInfo>
+	<Application Name="TestApp" Comment="">
+		<Attribute Name="Start" Type="BOOL" Value="value" Comment="comment"/>
+		<Attribute Name="Finish" Type="BOOL" Value="value" Comment="comment"/>
+		<SubAppNetwork>
+			<FB Name="mc_fb_1" Type="MC_MoveAbsolute" Comment="1" x="1000.0" y="375.0" Order="1">
+				<Parameter Name="AxisI" Value="X"/>
+				<Parameter Name="Execute" Value="Start"/>
+				<Parameter Name="Position" Value="Pos_X1"/>
+				<Parameter Name="Velocity" Value="Vel_X1"/>
+			</FB>
+			<FB Name="mc_fb_3" Type="MC_MoveVelocity" Comment="" x="3750.0" y="875.0" Order="3">
+				<Parameter Name="AxisI" Value="Y"/>
+				<Parameter Name="Velocity" Value="Vel_Y2"/>
+			</FB>
+			<FB Name="mc_fb_2" Type="MC_MoveAbsolute" Comment="1" x="1000.0" y="1625.0" Order="2">
+				<Parameter Name="AxisI" Value="Y"/>
+				<Parameter Name="Execute" Value="Start"/>
+				<Parameter Name="Position" Value="Pos_Y1"/>
+				<Parameter Name="Velocity" Value="Vel_Y1"/>
+			</FB>
+			<FB Name="and1" Type="AND" Comment="" x="2875.0" y="1000.0">
+			</FB>
+			<FB Name="mc_fb_4" Type="MC_MoveAbsolute" Comment="" x="5625.0" y="500.0" Order="4">
+				<Parameter Name="AxisI" Value="X"/>
+				<Parameter Name="Position" Value="Pos_X2"/>
+				<Parameter Name="Velocity" Value="Vel_X2"/>
+			</FB>
+			<FB Name="mc_fb_5" Type="MC_MoveAbsolute" Comment="" x="5625.0" y="1750.0" Order="5">
+				<Parameter Name="AxisI" Value="Y"/>
+				<Parameter Name="Position" Value="Pos_Y2"/>
+				<Parameter Name="Velocity" Value="Vel_Y3"/>
+			</FB>
+			<FB Name="and2" Type="AND" Comment="" x="7575.0" y="1250.0">
+			</FB>
+			<DataConnections>
+				<Connection Source="mc_fb_1.Done" Destination="and1.B1" Comment="" dx1="481.25"/>
+				<Connection Source="mc_fb_2.Done" Destination="and1.B2" Comment="" dx1="481.25"/>
+				<Connection Source="and1.O" Destination="mc_fb_3.Execute" Comment="" dx1="350.0"/>
+				<Connection Source="mc_fb_3.InVelocity" Destination="mc_fb_4.Execute" Comment="" dx1="250.0"/>
+				<Connection Source="mc_fb_3.InVelocity" Destination="mc_fb_5.Execute" Comment="" dx1="250.0"/>
+				<Connection Source="mc_fb_4.Done" Destination="and2.B1" Comment="" dx1="468.75"/>
+				<Connection Source="mc_fb_5.Done" Destination="and2.B2" Comment="" dx1="468.75"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+</System>
